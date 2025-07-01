@@ -1,0 +1,79 @@
+lweb <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Pay Demo</title>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
+                document.getElementById('apple-pay-button').style.display = 'block';
+            }
+        });
+
+        function beginApplePay() {
+            const paymentRequest = {
+                countryCode: 'US',
+                currencyCode: 'USD',
+                supportedNetworks: ['visa', 'masterCard', 'amex', 'discover'],
+                merchantCapabilities: ['supports3DS'],
+                total: {
+                    label: 'Demo Store',
+                    amount: '10.00'
+                }
+            };
+
+            const session = new ApplePaySession(3, paymentRequest);
+
+            session.onvalidatemerchant = function(event) {
+                fetch('/api/applepay/validate-merchant', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(event.validationURL)
+                })
+                .then(response => response.text())
+                .then(merchantSession => {
+                    session.completeMerchantValidation(JSON.parse(merchantSession));
+                })
+                .catch(err => session.abort());
+            };
+
+            session.onpaymentauthorized = function(event) {
+                fetch('/api/applepay/authorize-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(event.payment.token.paymentData)
+                })
+                .then(response => response.text())
+                .then(status => {
+                    session.completePayment(status === 'Payment successful' ? ApplePaySession.STATUS_SUCCESS : ApplePaySession.STATUS_FAILURE);
+                })
+                .catch(err => session.completePayment(ApplePaySession.STATUS_FAILURE));
+            };
+
+            session.begin();
+        }
+    </script>
+    <style>
+        #apple-pay-button {
+            display: none;
+            width: 200px;
+            height: 44px;
+            background-image: -webkit-named-image(apple-pay-logo-white);
+            background-color: black;
+            background-size: 100% 60%;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 8px;
+            margin: 40px auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align:center;">
+        <div id="apple-pay-button" onclick="beginApplePay()"></div>
+        <p>Click the button above to pay with Apple Pay.</p>
+    </div>
+</body>
+</html>

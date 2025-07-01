@@ -13,6 +13,34 @@ class ApplePayAPI {
         return ApplePaySession.canMakePaymentsWithActiveCard(this.merchantIdentifier);
     }
 
+    addCardToWallet() {
+        if (!window.ApplePaySession || !ApplePaySession.canAddPaymentPass) {
+            alert('Apple Pay card addition is not supported on this device/browser.');
+            return;
+        }
+        const config = {
+            encryptionScheme: 'ECC_V2',
+            cardholderName: 'Cardholder Name',
+            primaryAccountSuffix: '1234',
+            localizedDescription: 'Your Card Description',
+            paymentNetwork: 'visa'
+        };
+        const session = new ApplePaySession(3, config);
+        session.onvalidatemerchant = (event) => {
+            this.validateMerchant(event.validationURL)
+                .then(merchantSession => {
+                    session.completeMerchantValidation(merchantSession);
+                })
+                .catch(error => {
+                    session.abort();
+                });
+        };
+        session.onpaymentmethodselected = (event) => {
+            // Handle card addition logic here if needed
+        };
+        session.begin();
+    }
+
     initializeApplePay() {
         if (!this.checkApplePayAvailability()) {
             console.log('Apple Pay is not available');

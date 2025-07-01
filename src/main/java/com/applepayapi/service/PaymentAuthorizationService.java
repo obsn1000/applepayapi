@@ -7,22 +7,16 @@ import com.stripe.param.PaymentIntentCreateParams;
 
 @Service
 public class PaymentAuthorizationService {
-    
-    public PaymentAuthorizationService() {
-        Stripe.apiKey = "your_stripe_secret_key";
-    }
-    
     public String processPayment(String paymentToken) {
         try {
+            Stripe.apiKey = "your_stripe_secret_key";
             PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
                 .setAmount(1000L)
                 .setCurrency("usd")
                 .setPaymentMethod(paymentToken)
                 .setConfirm(true)
                 .build();
-            
             PaymentIntent intent = PaymentIntent.create(params);
-            
             if ("succeeded".equals(intent.getStatus())) {
                 return "Payment successful";
             } else {

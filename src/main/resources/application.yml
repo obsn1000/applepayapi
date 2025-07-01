@@ -1,5 +1,10 @@
 apple:
   certs:
-    dir: "${CERT_DIR:config/certificates/applepay}"  # Can override with env var
-    merchant-id: "merchant_id.pem"  # Relative to dir
+    dir: "${CERT_DIR:config/certificates/applepay}"
+    merchant-id: "merchant_id.pem"
     payment-processing: "apple_pay.pem"
+  merchant:
+    id: "your.merchant.id"
+    domain: "yourdomain.com"
+    display-name: "Your Store Name"
+  
