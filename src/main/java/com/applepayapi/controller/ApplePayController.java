@@ -31,7 +31,7 @@ public class ApplePayController {
         return ResponseEntity.ok(paymentStatus);
     }
 
-    // Single, correct endpoint to serve the .pkpass file
+    // Endpoint to serve the .pkpass file
     @GetMapping("/pkpass/download")
     public ResponseEntity<byte[]> downloadPkpass() throws IOException {
         InputStream is = getClass().getClassLoader().getResourceAsStream("public/REAPNET.pkpass");
