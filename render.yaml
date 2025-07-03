@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: applepayapi
+    env: java
+    buildCommand: mvn clean package
+    startCommand: java -jar target/*.jar
+    envVars:
+      - key: JAVA_VERSION
+        value: 11
+      # - key: APPLE_PAY_CERT_PASSWORD
+      #   value: yourpassword
