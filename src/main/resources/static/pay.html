@@ -31,9 +31,9 @@ lweb <!DOCTYPE html>
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(event.validationURL)
                 })
-                .then(response => response.text())
+                .then(response => response.json())
                 .then(merchantSession => {
-                    session.completeMerchantValidation(JSON.parse(merchantSession));
+                    session.completeMerchantValidation(merchantSession);
                 })
                 .catch(err => session.abort());
             };
@@ -44,9 +44,9 @@ lweb <!DOCTYPE html>
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(event.payment.token.paymentData)
                 })
-                .then(response => response.text())
-                .then(status => {
-                    session.completePayment(status === 'Payment successful' ? ApplePaySession.STATUS_SUCCESS : ApplePaySession.STATUS_FAILURE);
+                .then(response => response.json())
+                .then(result => {
+                    session.completePayment(result.status === 'success' ? ApplePaySession.STATUS_SUCCESS : ApplePaySession.STATUS_FAILURE);
                 })
                 .catch(err => session.completePayment(ApplePaySession.STATUS_FAILURE));
             };

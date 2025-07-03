@@ -67,6 +67,7 @@ class ApplePayAPI {
                 })
                 .catch(error => {
                     console.error('Merchant validation failed:', error);
+                    alert('Merchant validation failed. Please try again later.');
                     session.abort();
                 });
         };
@@ -74,11 +75,17 @@ class ApplePayAPI {
         session.onpaymentauthorized = (event) => {
             this.processPayment(event.payment.token)
                 .then(response => {
-                    if (response === 'Payment successful') {
+                    if (response.status === 'success') {
                         session.completePayment(ApplePaySession.STATUS_SUCCESS);
                     } else {
+                        alert('Payment failed: ' + response.message);
                         session.completePayment(ApplePaySession.STATUS_FAILURE);
                     }
+                })
+                .catch(error => {
+                    console.error('Payment processing failed:', error);
+                    alert('Payment processing failed. Please try again later.');
+                    session.completePayment(ApplePaySession.STATUS_FAILURE);
                 });
         };
 
@@ -104,7 +111,7 @@ class ApplePayAPI {
             },
             body: JSON.stringify(paymentToken)
         });
-        return await response.text();
+        return await response.json();
     }
 }
 

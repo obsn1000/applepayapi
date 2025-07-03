@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import java.io.IOException;
 import java.io.InputStream;
+import com.applepayapi.service.PaymentResponse;
 
 @RestController
 @RequestMapping("/api/applepay")
@@ -26,8 +27,8 @@ public class ApplePayController {
     }
 
     @PostMapping("/authorize-payment")
-    public ResponseEntity<String> authorizePayment(@RequestBody String paymentToken) {
-        String paymentStatus = paymentService.processPayment(paymentToken);
+    public ResponseEntity<PaymentResponse> authorizePayment(@RequestBody String paymentToken) {
+        PaymentResponse paymentStatus = paymentService.processPayment(paymentToken);
         return ResponseEntity.ok(paymentStatus);
     }
 

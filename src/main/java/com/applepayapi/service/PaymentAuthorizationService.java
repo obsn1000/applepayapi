@@ -7,7 +7,8 @@ import com.stripe.param.PaymentIntentCreateParams;
 
 @Service
 public class PaymentAuthorizationService {
-    public String processPayment(String paymentToken) {
+
+    public PaymentResponse processPayment(String paymentToken) {
         try {
             Stripe.apiKey = "your_stripe_secret_key";
             PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
@@ -18,12 +19,12 @@ public class PaymentAuthorizationService {
                 .build();
             PaymentIntent intent = PaymentIntent.create(params);
             if ("succeeded".equals(intent.getStatus())) {
-                return "Payment successful";
+                return new PaymentResponse("success", "Payment successful");
             } else {
-                return "Payment failed: " + intent.getStatus();
+                return new PaymentResponse("failure", "Payment failed: " + intent.getStatus());
             }
         } catch (Exception e) {
-            return "Payment error: " + e.getMessage();
+            return new PaymentResponse("error", "Payment error: " + e.getMessage());
         }
     }
 }
