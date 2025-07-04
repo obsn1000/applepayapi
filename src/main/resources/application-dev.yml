@@ -1,0 +1,26 @@
+# DEVELOPMENT CONFIGURATION
+# This file provides default values for local development
+# Override these values with environment variables in production
+
+server:
+  port: 8080
+
+bank:
+  amid: "DEV_AMID"
+  bank_name: "Development Bank"
+  account_number: "1234567890"
+  bank_code: "DEV001"
+  country: "US"
+  checksum: "DEV_CHECKSUM"
+  bban: "DEV_BBAN"
+  amid_isvalid: true
+  merchant_id: "merchant.com.example.dev"
+
+apple:
+  merchant:
+    id: "merchant.com.example.dev"
+    domain: "localhost:8080"
+    display-name: "Development Store"
+
+# Note: You still need to set APPLE_PAY_CERT_PASSWORD environment variable
+# or provide certificate files for SSL configuration to work

@@ -5,21 +5,21 @@ server:
   port: ${PORT:8080}
 
 bank:
-  amid: ${AMID}
-  bank_name: ${BANK_NAME}
-  account_number: ${ACCOUNT_NUMBER}
-  bank_code: ${BANK_CODE}
-  country: ${COUNTRY}
-  checksum: ${CHECKSUM}
-  bban: ${BBAN}
-  amid_isvalid: ${AMID_ISVALID}
-  merchant_id: ${MERCHANT_ID}
+  amid: ${AMID:DEV_AMID}
+  bank_name: ${BANK_NAME:Development Bank}
+  account_number: ${ACCOUNT_NUMBER:1234567890}
+  bank_code: ${BANK_CODE:DEV001}
+  country: ${COUNTRY:US}
+  checksum: ${CHECKSUM:DEV_CHECKSUM}
+  bban: ${BBAN:DEV_BBAN}
+  amid_isvalid: ${AMID_ISVALID:true}
+  merchant_id: ${MERCHANT_ID:merchant.com.example.dev}
 
 apple:
   merchant:
-    id: ${MERCHANT_ID}
-    domain: ${MERCHANT_DOMAIN}
-    display-name: ${MERCHANT_DISPLAY_NAME}
+    id: ${MERCHANT_ID:merchant.com.example.dev}
+    domain: ${MERCHANT_DOMAIN:localhost:8080}
+    display-name: ${MERCHANT_DISPLAY_NAME:Development Store}
 
 # Apple Pay certificate password (used in ApplePayConfig.java)
 # Set this in your Railway environment variables
