@@ -15,6 +15,12 @@ bank:
   amid_isvalid: ${AMID_ISVALID}
   merchant_id: ${MERCHANT_ID}
 
+apple:
+  merchant:
+    id: ${MERCHANT_ID}
+    domain: ${MERCHANT_DOMAIN}
+    display-name: ${MERCHANT_DISPLAY_NAME}
+
 # Apple Pay certificate password (used in ApplePayConfig.java)
 # Set this in your Railway environment variables
 # APPLE_PAY_CERT_PASSWORD: (your cert password)
