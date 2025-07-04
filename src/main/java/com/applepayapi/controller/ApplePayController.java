@@ -57,3 +57,7 @@ public String testValidation() {
         return "Error: " + e.getMessage(); // Expose the error
     }
 }
+@GetMapping("/test")
+public String test() {
+    return "API IS WORKING";
+}
