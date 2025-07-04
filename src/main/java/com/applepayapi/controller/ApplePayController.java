@@ -47,3 +47,13 @@ public class ApplePayController {
                 .body(pkpassBytes);
     }
 }
+@GetMapping("/test-validation")
+public String testValidation() {
+    try {
+        return validationService.validateMerchant(
+            "https://apple-pay-gateway-cert.apple.com/paymentservices/startSession"
+        );
+    } catch (Exception e) {
+        return "Error: " + e.getMessage(); // Expose the error
+    }
+}
