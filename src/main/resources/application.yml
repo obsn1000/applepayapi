@@ -21,6 +21,10 @@ apple:
     domain: ${MERCHANT_DOMAIN:localhost:8080}
     display-name: ${MERCHANT_DISPLAY_NAME:Development Store}
 
+apple:
+   certs:
+    key-path: "${APPLE_SIGNING_KEY}"  # Uses the variable directly
+
 # Apple Pay certificate password (used in ApplePayConfig.java)
 # Set this in your Railway environment variables
 # APPLE_PAY_CERT_PASSWORD: (your cert password)
