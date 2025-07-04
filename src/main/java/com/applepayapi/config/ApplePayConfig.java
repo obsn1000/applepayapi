@@ -42,19 +42,6 @@ public class ApplePayConfig {
 
     @Bean
     public RestTemplate restTemplate() {
-services:
-  - type: web
-    name: applepayapi
-    env: java
-    buildCommand: mvn clean package
-    startCommand: java -jar target/*.jar
-    envVars:
-      - key: JAVA_VERSION
-        value: 11
-      # - key: APPLE_PAY_CERT_PASSWORD
-      #   value: yourpassword
-# Ensure this file is in the root of your repository.
-# If you still see Node.js in your Render logs, try deleting and recreating the service on Render.com.    public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 }
