@@ -1,29 +1,17 @@
 # PRODUCTION CONFIGURATION
-# All sensitive values are now loaded from environment variables for security.
-# Example usage in Spring Boot: ${ENV_VAR_NAME}
+# All sensitive values are loaded from environment variables for security.
 
-kban:
-  ll5:
-    accountNumber: ${KBAN_ACCOUNT_NUMBER}
-    branchCode: ${KBAN_BRANCH_CODE}
-    iban: ${KBAN_IBAN}
-    transactionHash: ${KBAN_TRANSACTION_HASH}
-    sessionToken: ${KBAN_SESSION_TOKEN}
+bank:
+  amid: ${AMID}
+  bank_name: ${BANK_NAME}
+  account_number: ${ACCOUNT_NUMBER}
+  bank_code: ${BANK_CODE}
+  country: ${COUNTRY}
+  checksum: ${CHECKSUM}
+  bban: ${BBAN}
+  amid_isvalid: ${AMID_ISVALID}
+  merchant_id: ${MERCHANT_ID}
 
-akban:
-  ll5:
-    accountNumber: ${AKBAN_ACCOUNT_NUMBER}
-    branchCode: ${AKBAN_BRANCH_CODE}
-    iban: ${AKBAN_IBAN}
-    transactionHash: ${AKBAN_TRANSACTION_HASH}
-    sessionToken: ${AKBAN_SESSION_TOKEN}
-
-pkban:
-  ll5:
-    accountNumber: ${PKBAN_ACCOUNT_NUMBER}
-    branchCode: ${PKBAN_BRANCH_CODE}
-    iban: ${PKBAN_IBAN}
-    transactionHash: ${PKBAN_TRANSACTION_HASH}
-    sessionToken: ${PKBAN_SESSION_TOKEN}
-
-# Add other configuration sections as needed, always using env vars for sensitive data.
+# Apple Pay certificate password (used in ApplePayConfig.java)
+# Set this in your Railway environment variables
+# APPLE_PAY_CERT_PASSWORD: (your cert password)
