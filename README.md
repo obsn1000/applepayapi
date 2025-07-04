@@ -9,6 +9,9 @@ Apple Pay integration solution with Spring Boot backend and JavaScript frontend.
 - Domain verification support
 
 ## Setup
+
+**IMPORTANT:** For production, all sensitive configuration (account numbers, tokens, etc.) must be set via environment variables. Do not hardcode secrets in application.yml.
+
 1. Configure your Apple Merchant ID
 2. Set up domain verification
 3. Configure Stripe keys

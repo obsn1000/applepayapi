@@ -24,3 +24,7 @@
 
 # Maven
 target/
+
+# Apple Pay certificates (protect private keys!)
+config/certificates/applepay/*
+
