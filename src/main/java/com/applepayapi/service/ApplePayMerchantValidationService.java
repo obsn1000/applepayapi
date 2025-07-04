@@ -23,11 +23,14 @@ public class ApplePayMerchantValidationService {
             "domainName", domainName,
             "displayName", displayName
         );
-        Map<String, String> response = restTemplate.postForObject(
+        org.springframework.core.ParameterizedTypeReference<Map<String, Object>> typeRef =
+            new org.springframework.core.ParameterizedTypeReference<>() {};
+        Map<String, Object> response = restTemplate.exchange(
             APPLE_VALIDATION_URL,
-            request,
-            Map.class
-        );
-        return response.get("merchantSession");
+            org.springframework.http.HttpMethod.POST,
+            new org.springframework.http.HttpEntity<>(request),
+            typeRef
+        ).getBody();
+        return response != null ? (String) response.get("merchantSession") : null;
     }
 }
