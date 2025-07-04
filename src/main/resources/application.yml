@@ -1,6 +1,9 @@
 # PRODUCTION CONFIGURATION
 # All sensitive values are loaded from environment variables for security.
 
+server:
+  port: ${PORT:8080}
+
 bank:
   amid: ${AMID}
   bank_name: ${BANK_NAME}
