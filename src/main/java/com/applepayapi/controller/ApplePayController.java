@@ -46,7 +46,7 @@ public class ApplePayController {
                 .header("Content-Type", "application/vnd.apple.pkpass")
                 .body(pkpassBytes);
     }
-}
+
 @GetMapping("/test-validation")
 public String testValidation() {
     try {
@@ -60,4 +60,6 @@ public String testValidation() {
 @GetMapping("/test")
 public String test() {
     return "API IS WORKING";
+    }
 }
+
